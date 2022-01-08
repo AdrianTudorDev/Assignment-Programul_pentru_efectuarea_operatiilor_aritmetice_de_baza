@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ro" dir="ltr">
+<head>
+    <title>Calculator a operațiilor aritmetice de bază</title>
+    <meta charset="UTF-8">
+    <meta name="desciption" content="Title animation">
+    <meta name="keywords" content="HTML, CSS, JS, Javascript, mini calculator">
+    <meta name="author" content="Tudor Adrian"> 
+	<style>
+		body{
+			margin: 0;
+			padding: 0;	
+			font-family: 'Poppins', sans-serif;
+			background: lightgray;
+			margin-left: 25%;
+			min-height: 50vh;
+			width: 500px;
+		}
+		h2{
+			display: flex;
+			text-align: center;
+		}
+		main{
+			display: flex;
+			flex-direction: column;					
+			text-align: center;
+		}
+		.operator{
+			display: flex;
+			justify-content: center;					
+			align-items: center;
+		}
+		.operator h3{
+			margin: 10px;
+		}
+		.op div{
+			position: relative;
+			font-size: 1.2em;
+		}
+		.op div input{
+			float: left
+		}
+		.numbers{
+			width: 320px;
+			margin: 5px auto;
+			flex-direction: column;					
+			align-items: center;
+		}
+		.numbers h3{
+			text-align: center;
+			margin: 10px;
+		}
+		.numbers label{
+			float: left;
+			margin: 5px;
+		}
+		.numbers input{
+			float: right;
+			margin: 5px;
+		}
+		#calcul{
+			position: relative;
+			width: 100px;
+			margin: 10px auto;
+			border: 2px solid rgba(255,255,255,1);
+			border-radius: 10px;
+			background: rgba(255,255,255,0.5);
+			padding: 5px;			
+		}
+		#calcul:hover{
+		background: rgba(255,255,255,1);
+		}
+	</style>
+</head>
+<body>
+    <header>
+		<h2>Programul pentru efectuarea operațiilor aritmetice de bază</h2>
+    </header>
+	
+    <main>  
+		<section class="operator">
+			<h3>Operatorul matematic: </h3>
+			<div class="op">
+				<div>
+				  <input type="radio" id="adunare" name="operator" value="adunare">
+				  <label for="huey">adunare</label>
+				</div>
+
+				<div>
+				  <input type="radio" id="scădere" name="operator" value="scădere">
+				  <label for="dewey">scădere</label>
+				</div>
+
+				<div>
+				  <input type="radio" id="înmulțire" name="operator" value="înmulțire">
+				  <label for="louie">înmulțire</label>
+				</div>
+				<div>
+				  <input type="radio" id="împărţire" name="operator" value="împărţire">
+				  <label for="louie">împărţire</label>
+				</div>
+				
+			</div>
+		</section>
+		
+		<section class="numbers">
+			<h3>Scrie numerele:</h3>
+			<form>
+				<label>Primul numar:</label>
+				<input id="nr.a"><br><br>
+				<label>Al doilea numar:</label>
+				<input id="nr.b"><br>				
+			</form>
+		</section>
+		
+		<input id="calcul" type="submit" value="Calculeaza">
+		
+		<section class="result">
+			<h3>Rezultatul este: <span id="result">0</span></h3>
+		</section>
+	</main>
+	
+    <footer></footer>
+		
+	<script>
+		var calculate = document.getElementById('calcul');
+		
+		calculate.addEventListener('click', () => {	
+			var a = Number(document.getElementById("nr.a").value);
+			var b = Number(document.getElementById("nr.b").value);
+			var adu = document.getElementById("adunare");
+			var sca = document.getElementById("scădere");
+			var inm = document.getElementById("înmulțire");
+			var imp = document.getElementById("împărţire");
+			var op;	
+			
+			if (adu.checked){
+				op = 'adu';
+			} else if (sca.checked){
+				op = 'sca';
+			} else if (inm.checked){
+				op = 'inm';
+			} else if (imp.checked) {
+				op = 'imp';
+			};
+						
+			if(!isNaN(a) && !isNaN(b)){
+				let res;
+				switch (op){
+					case 'adu':
+						res = a + b;
+						break;
+					case 'sca':
+						res = a - b;
+						break;
+					case 'inm':
+						res = a * b;
+						break	;				
+					case 'imp':
+						res = a / b;
+						break;
+					default: alert('Trebuie selectat operatorul matematic!'); 
+				}
+				document.getElementById('result').innerHTML = parseFloat(res).toFixed(4);
+			} else if (isNaN(a) && isNaN(b)){
+				alert('Ambele elemente nu sunt de tip numeric!');
+			} else if(isNaN(a)){
+				alert('Primul element nu este de tip numeric!');
+			} else if(isNaN(b)){
+				alert('Al doilea element nu este de tip numeric!');
+			} 		
+		});
+	</script>
+</body>
+</html>
